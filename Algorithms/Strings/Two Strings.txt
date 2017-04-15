@@ -1,0 +1,43 @@
+/**
+* https://www.hackerrank.com/challenges/two-strings
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int c = in.nextInt();
+        in.nextLine();
+        for(int i=0; i<c; i++){
+            String a = in.nextLine();
+            String b = in.nextLine();
+            Character[] a_ch = new Character[a.length()];
+            for(int j=0; j<a.length(); j++){
+                a_ch[j] = a.charAt(j);
+            }
+            Character[] b_ch = new Character[b.length()];
+            for(int j=0; j<b.length(); j++){
+                b_ch[j] = b.charAt(j);
+            }
+            List<Character> temp = Arrays.asList(a_ch);
+            TreeSet<Character> a_set = new TreeSet<Character>(temp);
+            temp = Arrays.asList(b_ch);
+            TreeSet<Character> b_set = new TreeSet<Character>(temp);
+            boolean flag = false;
+            for(Character ch : b_set) {
+                if(a_set.contains(ch)){
+                    flag = true;
+                    System.out.println("YES");
+                    break;
+                }
+            }
+            if(!flag) System.out.println("NO");
+        }
+    }
+}

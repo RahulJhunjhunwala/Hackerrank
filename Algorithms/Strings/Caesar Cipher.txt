@@ -1,0 +1,27 @@
+/**
+* https://www.hackerrank.com/challenges/caesar-cipher-1
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String s = in.next();
+        int k = in.nextInt();
+        char[] ch = s.toCharArray();
+        k = k % 26;
+        for (int i=0; i<n; i++){
+            if(ch[i]>='A' && ch[i]<='Z') ch[i] = (char)((ch[i]+k)%91 < 65? (ch[i]+k)%91 + 65: (ch[i]+k)%91);
+            else if(ch[i]>='a' && ch[i]<='z') ch[i] = (char)((ch[i]+k)%123 < 97? (ch[i]+k)%123 + 97: (ch[i]+k)%123);
+            else continue;
+        }
+        System.out.println(new String(ch));
+    }
+}

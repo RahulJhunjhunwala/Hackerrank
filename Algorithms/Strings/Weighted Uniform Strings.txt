@@ -1,0 +1,41 @@
+/**
+* https://www.hackerrank.com/challenges/weighted-uniform-string
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        int n = in.nextInt();
+        Map<Character, Integer> map = new TreeMap<Character, Integer>();
+        for(int i=0; i<s.length(); i++){
+            Pattern p = Pattern.compile("^" + s.charAt(i) + "*");
+            Matcher m = p.matcher(s);
+            m.find();
+            int end = m.end();
+            if(map.containsKey(s.charAt(i)) && map.get(s.charAt(i)) < end) map.put(s.charAt(i), end);
+            else if(!map.containsKey(s.charAt(i))) map.put(s.charAt(i), end);
+            s = s.substring(end);
+            i=-1;
+        }
+        for(int a0 = 0; a0 < n; a0++){
+            int x = in.nextInt();
+            boolean flag = false;
+            for(char c : map.keySet()){
+                if(x/(c-96) <= map.get(c) && x%(c-96) == 0) {
+                    System.out.println("Yes");
+                    flag = true;
+                    break;
+                }
+            }
+            if(!flag) System.out.println("No");
+        }
+    }
+}

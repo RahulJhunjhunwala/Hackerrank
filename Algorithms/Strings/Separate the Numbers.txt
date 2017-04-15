@@ -1,0 +1,53 @@
+/**
+* https://www.hackerrank.com/challenges/separate-the-numbers
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String s = in.next();
+            if(s.length() <= 1 || s.charAt(0) == '0') System.out.println("NO");
+            else {
+                boolean flag = false;
+                String s1="", s2="", temp = s;
+                long num1, num2;
+                for(int i=1; i<s.length() && s1.length()<=s.length()/2; i++){
+                    s1 = temp.substring(0, i);
+                    num1 = Long.parseLong(s1);
+                    num2 = num1 + 1;
+                    s2 = String.valueOf(num2);
+                    //System.out.println("s1 = " + s1 + "\ts2 = " + s2);
+                    temp = temp.substring(s1.length());
+                    while(!temp.equals("")){
+                        //System.out.println("temp = " + temp);
+                        if(temp.startsWith(s2)){
+                            temp = temp.substring(s2.length());
+                            flag = true;
+                            num2 += 1;
+                            s2 = String.valueOf(num2);
+                        }
+                        else {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag) {
+                        System.out.println("YES " + num1);
+                        break;
+                    }
+                    else temp = s;
+                }
+                if(!flag) System.out.println("NO");
+            }
+        }
+    }
+}

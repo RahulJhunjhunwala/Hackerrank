@@ -1,0 +1,53 @@
+/**
+* https://www.hackerrank.com/challenges/two-characters
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+		
+		Scanner in = new Scanner(System.in);
+		int len = in.nextInt();
+		String s = in.next();
+		
+		char[] ch = s.toCharArray();
+		Map<String, Integer> valid_map = new HashMap<String, Integer>();
+		List<String> ignore_list = new ArrayList<String>();
+		for(int i=0; i<len-1; i++){
+			char ch_1 = ch[i];
+			for(int j=i+1; j<len; j++){
+				char ch_2 = ch[j];
+				if(ch_1 == ch_2) continue;
+				else if(ignore_list.contains(ch_1 + "" + ch_2)) continue;
+				else {
+					String s_new = new String(s);
+					String regex = "[^(" + ch_1 + "|" + ch_2 + ")]";
+					s_new = s_new.replaceAll(regex, "");
+					boolean flag = true;
+					
+					for(int l=0; l<s_new.length()-1; l++){
+						if(s_new.charAt(l) == s_new.charAt(l+1)){
+							ignore_list.add(ch_1+""+ch_2);
+							ignore_list.add(ch_2+""+ch_1);
+							flag = false;
+							break;
+						}
+					}
+					if(flag){
+						valid_map.put(ch_1 + "" + ch_2, s_new.length());
+					}
+				}
+			}
+		}
+		List<Integer> val = new ArrayList(valid_map.values());
+		Collections.sort(val);
+		if(val.size() > 0) System.out.println(val.get(val.size()-1));
+		else System.out.println(0);
+	}
+}

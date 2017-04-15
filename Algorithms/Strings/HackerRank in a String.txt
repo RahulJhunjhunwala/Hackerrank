@@ -1,0 +1,35 @@
+/**
+* https://www.hackerrank.com/challenges/hackerrank-in-a-string
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String s = in.next();
+            char[] ch = {'h', 'a', 'c', 'k', 'e', 'r', 'r', 'a', 'n', 'k'};
+            int pos = -1;
+            boolean flag = false;
+            for(int i=0; i<s.length() && i<ch.length; i++){
+                if(s.indexOf(ch[i],pos+1) != -1) {
+                    pos = s.indexOf(ch[i],pos+1);
+                    flag = true;
+                }
+                else {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag) System.out.println("YES");
+            else System.out.println("NO");
+        }
+    }
+}

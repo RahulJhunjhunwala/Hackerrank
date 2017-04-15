@@ -1,0 +1,44 @@
+/**
+* https://www.hackerrank.com/challenges/palindrome-index
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        for(int i=0; i<t; i++){
+            String s = in.next();
+            StringBuffer sb_for = new StringBuffer(s);
+            StringBuffer sb_rev = new StringBuffer(s);
+            sb_rev.reverse();
+            if(sb_for.toString().equals(sb_rev.toString())) System.out.println(-1);
+            else{
+                for(int start=0, end=s.length()-1; start<=end;){
+                    if(s.charAt(start) == s.charAt(end)){
+                        start++;
+                        end--;
+                    }
+                    else{
+                    	sb_for = sb_for.deleteCharAt(end);
+                        sb_rev = sb_rev.deleteCharAt(start);
+                        if(sb_for.toString().equals(sb_rev.toString())){
+                            System.out.println(end);
+                            break;
+                        }
+                        else {
+                            System.out.println(start);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
